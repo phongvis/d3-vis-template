@@ -1,0 +1,9 @@
+.pv-template .item text {
+    fill: white;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.pv-template .item circle {
+    fill: black;
+}
