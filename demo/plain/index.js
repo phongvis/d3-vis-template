@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Instantiate vis and its parameters
     const vis = pv.vis.template()
         .id(d => d.id)
@@ -8,13 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.onresize = _.throttle(update, 100);
 
     // Data
-    let data;
-    d3.json('../data/sample.json').then(json => {
-        data = json;
+    let data = await d3.json('../../data/sample.json');
 
-        // Build the vis
-        update();
-    });
+    // Build the vis
+    update();
 
     /**
      * Updates vis when window changed.

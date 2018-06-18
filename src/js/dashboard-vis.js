@@ -5,10 +5,11 @@ pv.vis.template = function() {
     /**
      * Visual configs.
      */
-    const margin = { top: 10, right: 10, bottom: 10, left: 10 };
+    const margin = { top: 40, right: 10, bottom: 10, left: 10 };
 
     let visWidth = 960, visHeight = 600, // Size of the visualization, including margins
-        width, height; // Size of the main content, excluding margins
+        width, height, // Size of the main content, excluding margins
+        visTitle = 'Vis Title';
 
     /**
      * Accessors.
@@ -40,8 +41,11 @@ pv.vis.template = function() {
         selection.each(function(_data) {
             // Initialize
             if (!this.visInitialized) {
-                visContainer = d3.select(this).append('g').attr('class', 'pv-template');
+                const container = d3.select(this).append('g').attr('class', 'pv-template');
+                visContainer = container.append('g').attr('class', 'main-vis');
                 itemContainer = visContainer.append('g').attr('class', 'items');
+
+                addSettings(container);
 
                 this.visInitialized = true;
             }
@@ -122,6 +126,15 @@ pv.vis.template = function() {
         });
     }
 
+    function addSettings(container) {
+        container = container.append('foreignObject').attr('class', 'settings')
+            .attr('width', '100%').attr('height', '100%')
+            .append('xhtml:div').attr('class', 'vis-header');
+
+        // Title
+        container.append('xhtml:div').attr('class', 'title').text(visTitle);
+    }
+
     /**
      * Sets/gets the width of the visualization.
      */
@@ -137,6 +150,15 @@ pv.vis.template = function() {
     module.height = function(value) {
         if (!arguments.length) return visHeight;
         visHeight = value;
+        return this;
+    };
+
+    /**
+     * Sets/gets the title of the visualization.
+     */
+    module.visTitle = function(value) {
+        if (!arguments.length) return visTitle;
+        visTitle = value;
         return this;
     };
 
