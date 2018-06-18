@@ -128,7 +128,7 @@ pv.vis.template = function() {
 
     function addSettings(container) {
         container = container.append('foreignObject').attr('class', 'settings')
-            .attr('width', '100%').attr('height', '100%')
+            .attr('width', '100%')
             .append('xhtml:div').attr('class', 'vis-header');
 
         // Title
